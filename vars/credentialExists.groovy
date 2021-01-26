@@ -1,5 +1,5 @@
 import com.cloudbees.plugins.credentials.CredentialsProvider
-import com.cloudbees.plugins.credentials.common.UsernamePasswordCredentials
+import com.cloudbees.plugins.credentials.common.StandardCredentials
 import com.cloudbees.plugins.credentials.domains.DomainRequirement
 
 /**
@@ -10,7 +10,7 @@ import com.cloudbees.plugins.credentials.domains.DomainRequirement
 boolean call(String id) {
   def available_credentials = CredentialsProvider.findCredentialById(
     id,
-    UsernamePasswordCredentials.class,
+    StandardCredentials.class,
     currentBuild.getRawBuild(),
     Collections.<DomainRequirement>emptyList()
   )
