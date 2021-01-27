@@ -1,0 +1,31 @@
+#!groovy
+
+void notifyStatus(String status) {
+	String color = getStatusColor(status)
+	slackSend (
+		channel : '#jenkins-ci',
+		color   : color,
+		message : "${status}: '${currentBuild.fullDisplayName} [${currentBuild.displayName}]' after ${currentBuild.durationString} (<${RUN_DISPLAY_URL}|Open>)"
+	)
+}
+
+String getStatusColor(String status) {
+	if (status == null) {
+		return 'good'
+	}
+	if (status == 'STARTED') {
+		return getStatusColor(currentBuild.previousBuild?.result)
+	}
+	if (status == 'SUCCESS') {
+		return 'good'
+	}
+	if (status == 'UNSTABLE') {
+		return 'warning'
+	}
+	if (status == 'FAILURE') {
+		return 'danger'
+	}
+	// this should never happen - return a blue color because that's different to any other status color
+	echo "Unknown build status ${status}"
+	return '#0000FF'
+}
