@@ -30,5 +30,7 @@ String call(String id) {
 		return globalId
 	}
 
+	echo "No credential for ${globalId} or ${branchId}"
+
 	return null
 }
