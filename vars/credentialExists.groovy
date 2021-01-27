@@ -30,5 +30,7 @@ boolean call(String id) {
 		return true
 	}
 
+	echo "No credential for ${globalId} or ${branchId}"
+
 	return false
 }
