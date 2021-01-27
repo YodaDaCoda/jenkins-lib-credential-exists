@@ -20,7 +20,12 @@ Boolean credentialExists(String id) {
  */
 boolean call(String id) {
 	globalId = id.toUpperCase().toString()
-	branchId = "${globalId}_${BRANCH_NAME}".toUpperCase().toString()
+
+	if (CHANGE_TARGET != null) {
+		branchId = "${globalId}_${CHANGE_TARGET}".toUpperCase().toString()
+	} else {
+		branchId = "${globalId}_${BRANCH_NAME}".toUpperCase().toString()
+	}
 
 	if (credentialExists(branchId)) {
 		return true
