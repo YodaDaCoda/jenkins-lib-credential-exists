@@ -1,3 +1,5 @@
+#!groovy
+
 import com.cloudbees.plugins.credentials.CredentialsProvider
 import com.cloudbees.plugins.credentials.common.StandardCredentials
 import com.cloudbees.plugins.credentials.domains.DomainRequirement
