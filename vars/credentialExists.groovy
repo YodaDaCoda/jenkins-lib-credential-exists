@@ -23,10 +23,10 @@ Boolean credentialExists(String id) {
 boolean call(String id) {
 	globalId = id.toUpperCase().toString()
 
-	if (CHANGE_TARGET != null) {
-		branchId = "${globalId}_${CHANGE_TARGET}".toUpperCase().toString()
+	if (env.CHANGE_TARGET != null) {
+		branchId = "${globalId}_${env.CHANGE_TARGET}".toUpperCase().toString()
 	} else {
-		branchId = "${globalId}_${BRANCH_NAME}".toUpperCase().toString()
+		branchId = "${globalId}_${env.BRANCH_NAME}".toUpperCase().toString()
 	}
 
 	if (credentialExists(branchId)) {
