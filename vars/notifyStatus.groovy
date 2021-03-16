@@ -22,37 +22,22 @@ String getStatusColor(String status) {
 }
 
 String getMessage(status) {
-	println('begin getMessage()')
-
 	String ret = "${status}: ${currentBuild.fullDisplayName}"
 
 	if (env.CHANGE_ID != null) {
 		ret = "${ret} (<${env.CHANGE_URL}|${env.CHANGE_ID}> by ${env.CHANGE_AUTHOR_DISPLAY_NAME})"
-		println('change_id not null')
-		println(ret)
 	} else if (env.BRANCH_NAME != null) {
-		println('branch_name not null')
-		println(ret)
 		ret = "${ret} (branch: ${env.BRANCH_NAME})"
 	}
 
-	println(ret)
-
 	ret = "${ret} after ${currentBuild.durationString} (<${RUN_DISPLAY_URL}|Open>)"
-
-	println(ret)
-
-	println('end getMessage()')
 
 	return ret
 }
 
 void call(String status) {
-	println('notifyStatus')
 	String color = getStatusColor(status)
-	println(color)
 	String message = getMessage(status)
-	println(message)
 	slackSend (
 		channel : '#jenkins-ci',
 		color   : color,
