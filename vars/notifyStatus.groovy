@@ -1,5 +1,7 @@
 #!groovy
 
+import hudson.Util;
+
 String getStatusColor(String status) {
 	if (status == null) {
 		return 'good'
@@ -24,13 +26,15 @@ String getStatusColor(String status) {
 String getMessage(status) {
 	String ret = "${status}: ${currentBuild.fullDisplayName}"
 
+	String buildDurationString = Util.getTimeSpanString(currentBuild.duration)
+
 	if (env.CHANGE_ID != null) {
 		ret = "${ret} (<${env.CHANGE_URL}|#${env.CHANGE_ID}> by ${env.CHANGE_AUTHOR_DISPLAY_NAME})"
 	} else if (env.BRANCH_NAME != null) {
 		ret = "${ret} (branch: ${env.BRANCH_NAME})"
 	}
 
-	ret = "${ret} after ${currentBuild.durationString} (<${RUN_DISPLAY_URL}|Open>)"
+	ret = "${ret} after ${buildDurationString} (<${RUN_DISPLAY_URL}|Open>)"
 
 	return ret
 }
