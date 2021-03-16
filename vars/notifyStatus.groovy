@@ -25,10 +25,10 @@ String getMessage() {
 
 	String ret = "${status}: ${currentBuild.fullDisplayName}"
 
-	if (env.CHANGE_ID != null) {
+	if ("${env.CHANGE_ID}" != null) {
 		ret = "${ret} (<${env.CHANGE_URL}|${env.CHANGE_ID}> by ${env.CHANGE_AUTHOR_DISPLAY_NAME})"
 
-	} else if (env.BRANCH_NAME != null) {
+	} else if ("${env.BRANCH_NAME}" != null) {
 		ret = "${ret} (branch: ${env.BRANCH_NAME})"
 	}
 
