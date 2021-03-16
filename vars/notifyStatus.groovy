@@ -34,7 +34,11 @@ String getMessage(status) {
 		ret = "${ret} (branch: ${env.BRANCH_NAME})"
 	}
 
-	ret = "${ret} after ${buildDurationString} (<${RUN_DISPLAY_URL}|Open>)"
+	if (status != 'STARTED') {
+		ret = "${ret} after ${buildDurationString}"
+	}
+
+	ret = " (<${RUN_DISPLAY_URL}|Open>)"
 
 	return ret
 }
