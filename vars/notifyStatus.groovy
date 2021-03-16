@@ -26,6 +26,6 @@ void call(String status) {
 	slackSend (
 		channel : '#jenkins-ci',
 		color   : color,
-		message : "${status}: '${currentBuild.fullDisplayName} [${currentBuild.displayName}]' after ${currentBuild.durationString} (<${RUN_DISPLAY_URL}|Open>)"
+		message : "${status}: '${currentBuild.fullDisplayName} (<${CHANGE_URL}|${CHANGE_ID}> by ${CHANGE_AUTHOR_DISPLAY_NAME})' after ${currentBuild.durationString} (<${RUN_DISPLAY_URL}|Open>)"
 	)
 }
