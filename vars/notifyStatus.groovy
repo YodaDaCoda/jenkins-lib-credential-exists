@@ -26,18 +26,11 @@ String getMessage(status) {
 
 	String ret = "${status}: ${currentBuild.fullDisplayName}"
 
-	println(ret)
-	println("${env.CHANGE_ID}")
-	println("${env.BRANCH_NAME}")
-	println(env.CHANGE_ID)
-	println(env.BRANCH_NAME)
-	println(env)
-
-	if ("${env.CHANGE_ID}" != null) {
+	if (${env.CHANGE_ID} != null) {
 		ret = "${ret} (<${env.CHANGE_URL}|${env.CHANGE_ID}> by ${env.CHANGE_AUTHOR_DISPLAY_NAME})"
 		println('change_id not null')
 		println(ret)
-	} else if ("${env.BRANCH_NAME}" != null) {
+	} else if (${env.BRANCH_NAME} != null) {
 		println('branch_name not null')
 		println(ret)
 		ret = "${ret} (branch: ${env.BRANCH_NAME})"
