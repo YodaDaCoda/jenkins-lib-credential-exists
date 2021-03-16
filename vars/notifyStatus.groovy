@@ -21,7 +21,7 @@ String getStatusColor(String status) {
 	return '#0000FF'
 }
 
-void getMessage() {
+String getMessage() {
 
 	String ret = "${status}: ${currentBuild.fullDisplayName}"
 
