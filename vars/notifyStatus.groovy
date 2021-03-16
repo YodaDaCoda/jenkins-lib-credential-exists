@@ -27,8 +27,8 @@ String getMessage() {
 	String ret = "${status}: ${currentBuild.fullDisplayName}"
 
 	out.println(ret)
-	out.println("$(env.CHANGE_ID}")
-	out.println("$(env.BRANCH_NAME}")
+	out.println("${env.CHANGE_ID}")
+	out.println("${env.BRANCH_NAME}")
 	out.println(env.CHANGE_ID)
 	out.println(env.BRANCH_NAME)
 	out.println(env)
