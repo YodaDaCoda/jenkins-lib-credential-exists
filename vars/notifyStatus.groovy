@@ -22,44 +22,44 @@ String getStatusColor(String status) {
 }
 
 String getMessage() {
-	out.println('begin getMessage()')
+	println('begin getMessage()')
 
 	String ret = "${status}: ${currentBuild.fullDisplayName}"
 
-	out.println(ret)
-	out.println("${env.CHANGE_ID}")
-	out.println("${env.BRANCH_NAME}")
-	out.println(env.CHANGE_ID)
-	out.println(env.BRANCH_NAME)
-	out.println(env)
+	println(ret)
+	println("${env.CHANGE_ID}")
+	println("${env.BRANCH_NAME}")
+	println(env.CHANGE_ID)
+	println(env.BRANCH_NAME)
+	println(env)
 
 	if ("${env.CHANGE_ID}" != null) {
 		ret = "${ret} (<${env.CHANGE_URL}|${env.CHANGE_ID}> by ${env.CHANGE_AUTHOR_DISPLAY_NAME})"
-		out.println('change_id not null')
-		out.println(ret)
+		println('change_id not null')
+		println(ret)
 	} else if ("${env.BRANCH_NAME}" != null) {
-		out.println('branch_name not null')
-		out.println(ret)
+		println('branch_name not null')
+		println(ret)
 		ret = "${ret} (branch: ${env.BRANCH_NAME})"
 	}
 
-	out.println(ret)
+	println(ret)
 
 	ret = "${ret} after ${currentBuild.durationString} (<${RUN_DISPLAY_URL}|Open>)"
 
-	out.println(ret)
+	println(ret)
 
-	out.println('end getMessage()')
+	println('end getMessage()')
 
 	return ret
 }
 
 void call(String status) {
-	out.println('notifyStatus')
+	println('notifyStatus')
 	String color = getStatusColor(status)
-	out.println(color)
+	println(color)
 	String message = getMessage()
-	out.println(message)
+	println(message)
 	slackSend (
 		channel : '#jenkins-ci',
 		color   : color,
