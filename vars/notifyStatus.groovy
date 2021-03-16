@@ -21,7 +21,7 @@ String getStatusColor(String status) {
 	return '#0000FF'
 }
 
-String getMessage() {
+String getMessage(status) {
 	println('begin getMessage()')
 
 	String ret = "${status}: ${currentBuild.fullDisplayName}"
@@ -58,7 +58,7 @@ void call(String status) {
 	println('notifyStatus')
 	String color = getStatusColor(status)
 	println(color)
-	String message = getMessage()
+	String message = getMessage(status)
 	println(message)
 	slackSend (
 		channel : '#jenkins-ci',
