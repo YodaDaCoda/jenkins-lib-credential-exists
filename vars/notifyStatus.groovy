@@ -1,5 +1,7 @@
 #!groovy
 
+import hudson.Util;
+
 String getStatusColor(String status) {
 	if (status == null) {
 		return 'good'
@@ -23,9 +25,10 @@ String getStatusColor(String status) {
 
 void call(String status) {
 	String color = getStatusColor(status)
+	String buildDurationString = Util.getTimeSpanString(currentBuild.duration)
 	slackSend (
 		channel : '#jenkins-ci',
 		color   : color,
-		message : "${status}: '${currentBuild.fullDisplayName} (<${CHANGE_URL}|${CHANGE_ID}> by ${CHANGE_AUTHOR_DISPLAY_NAME})' after ${currentBuild.durationString} (<${RUN_DISPLAY_URL}|Open>)"
+		message : "${status}: '${currentBuild.fullDisplayName} (<${CHANGE_URL}|${CHANGE_ID}> by ${CHANGE_AUTHOR_DISPLAY_NAME})' after ${buildDurationString} (<${RUN_DISPLAY_URL}|Open>)"
 	)
 }
