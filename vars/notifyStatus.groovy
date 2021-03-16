@@ -38,7 +38,7 @@ String getMessage(status) {
 		ret = "${ret} after ${buildDurationString}"
 	}
 
-	ret = " (<${RUN_DISPLAY_URL}|Open>)"
+	ret = "${ret} (<${RUN_DISPLAY_URL}|Open>)"
 
 	return ret
 }
