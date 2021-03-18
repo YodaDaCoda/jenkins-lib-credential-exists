@@ -52,7 +52,7 @@ String getMessage(status) {
 	return ret
 }
 
-void attachFile(thread) {
+void attachFile(slackResponse) {
 	String sfdxReportFile = 'build/reports/sfdx-report.json'
 
 	if (!fileExists(sfdxReportFile)) {
@@ -79,12 +79,12 @@ void attachFile(thread) {
 	message = "${message}\nTests: ${numberTestsCompleted}/${numberTestsTotal} (errors: ${numberTestErrors})"
 
 	slackSend(
-		channel : thread,
+		channel : slackResponse.threadId,
 		message : message
 	)
 
 	slackUploadFile(
-		channel: thread,
+		channel: "#jenkins-ci:${slackResponse.ts}",
 		filePath: sfdxReportFile
 	)
 }
@@ -95,8 +95,10 @@ void sendMessage(status, channel, color, message) {
 		color   : color,
 		message : message
 	)
+	println(slackResponse)
+	println(slackResponse.threadId)
 	if (status != 'SUCCESS') {
-		attachFile(slackResponse.threadId)
+		attachFile(slackResponse)
 	}
 }
 
