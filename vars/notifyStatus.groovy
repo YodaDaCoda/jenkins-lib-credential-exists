@@ -60,7 +60,7 @@ void attachFile(thread) {
 		return
 	}
 
-	def report = readJSON(file: sfdxReportFile)
+	def report = readYaml(file: sfdxReportFile)
 
 	if (report['result'] == null) {
 		println("SFDX deploy report json file is not in an understood format, missing 'result' key (${sfdxReportFile})")
