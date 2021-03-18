@@ -78,9 +78,13 @@ void attachFile(thread) {
 	message = "${message}\nComponents: ${numberComponentsDeployed}/${numberComponentsTotal} (errors: ${numberComponentErrors})"
 	message = "${message}\nTests: ${numberTestsCompleted}/${numberTestsTotal} (errors: ${numberTestErrors})"
 
+	slackSend(
+		channel : thread,
+		message : message
+	)
+
 	slackUploadFile(
 		channel: thread,
-		initialComment: message,
 		filePath: sfdxReportFile
 	)
 }
