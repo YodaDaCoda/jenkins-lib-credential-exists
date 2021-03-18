@@ -76,7 +76,7 @@ void attachFile(thread) {
 
 	String message = "SFDX Build Report"
 	message = "${message}\nComponents: ${numberComponentsDeployed}/${numberComponentsTotal} (errors: ${numberComponentErrors})"
-	message = "${message}\Tests: ${numberTestsCompleted}/${numberTestsTotal} (errors: ${numberTestErrors})"
+	message = "${message}\nTests: ${numberTestsCompleted}/${numberTestsTotal} (errors: ${numberTestErrors})"
 
 	slackUploadFile(
 		channel: thread,
