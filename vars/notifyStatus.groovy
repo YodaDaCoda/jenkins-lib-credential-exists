@@ -84,7 +84,7 @@ void attachFile(slackResponse) {
 	)
 
 	slackUploadFile(
-		channel: "#jenkins-ci:${slackResponse.ts}",
+		channel: slackResponse.threadId,
 		filePath: sfdxReportFile
 	)
 }
@@ -95,14 +95,6 @@ void sendMessage(status, channel, color, message) {
 		color   : color,
 		message : message
 	)
-	println(slackResponse)
-	println(slackResponse.getProperties())
-	println(slackResponse.threadId)
-	println(slackResponse.getThreadId())
-	println(slackResponse.ts)
-	println(slackResponse.getTs())
-	println(slackResponse.channelId)
-	println(slackResponse.getChannelId())
 	if (status != 'STARTED' && status != 'SUCCESS') {
 		attachFile(slackResponse)
 	}
