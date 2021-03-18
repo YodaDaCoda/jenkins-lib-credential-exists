@@ -96,6 +96,7 @@ void sendMessage(status, channel, color, message) {
 		message : message
 	)
 	println(slackResponse)
+	println(slackResponse.getProperties())
 	println(slackResponse.threadId)
 	println(slackResponse.getThreadId())
 	println(slackResponse.ts)
