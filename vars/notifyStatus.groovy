@@ -102,7 +102,7 @@ void sendMessage(status, channel, color, message) {
 	println(slackResponse.getTs())
 	println(slackResponse.channelId)
 	println(slackResponse.getChannelId())
-	if (status != 'SUCCESS') {
+	if (status != 'STARTED' && status != 'SUCCESS') {
 		attachFile(slackResponse)
 	}
 }
