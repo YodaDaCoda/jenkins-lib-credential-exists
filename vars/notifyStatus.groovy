@@ -52,22 +52,52 @@ String getMessage(status) {
 	return ret
 }
 
-void call(String status) {
-	String color = getStatusColor(status)
-	String message = getMessage(status)
+void attachFile(thread) {
+	String sfdxReportFile = 'build/reports/sfdx-report.json'
+
+	if (!fileExists(sfdxReportFile)) {
+		println("Unable to find SFDX deploy report file (${sfdxReportFile})")
+		return
+	}
+
+	def report = readJSON(file: sfdxReportFile)
+
+	if (report['result'] == null) {
+		println("SFDX deploy report json file is not in an understood format, missing 'result' key (${sfdxReportFile})")
+		return
+	}
+
+	def numberComponentErrors    = report['result']['numberComponentErrors']
+	def numberComponentsDeployed = report['result']['numberComponentsDeployed']
+	def numberComponentsTotal    = report['result']['numberComponentsTotal']
+	def numberTestErrors         = report['result']['numberTestErrors']
+	def numberTestsCompleted     = report['result']['numberTestsCompleted']
+	def numberTestsTotal         = report['result']['numberTestsTotal']
+
+	String message = "SFDX Build Report"
+	message = "${message}\nComponents: ${numberComponentsDeployed}/${numberComponentsTotal} (errors: ${numberComponentErrors})"
+	message = "${message}\Tests: ${numberTestsCompleted}/${numberTestsTotal} (errors: ${numberTestErrors})"
+
+	slackUploadFile(
+		channel: thread,
+		initialComment: message,
+		filePath: sfdxReportFile
+	)
+}
+
+void sendMessage(status, channel, color, message) {
 	def slackResponse = slackSend(
-		channel : '#jenkins-ci',
+		channel : channel,
 		color   : color,
 		message : message
 	)
-
-	// attach sfdx build report to build failure
-	String sfdxReportFile = 'build/reports/sfdx-report.json'
-	if (status != 'SUCCESS' && fileExists(sfdxReportFile)) {
-		slackUploadFile(
-			channel: slackResponse.threadId,
-			initialComment: 'SFDX Build Report',
-			filePath: sfdxReportFile
-		)
+	if (status != 'SUCCESS') {
+		attachFile(slackResponse.threadId)
 	}
+}
+
+void call(String status) {
+	String color = getStatusColor(status)
+	String message = getMessage(status)
+	sendMessage(status, '#jenkins-ci', color, message)
 }
