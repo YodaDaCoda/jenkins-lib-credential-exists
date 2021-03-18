@@ -55,7 +55,7 @@ String getMessage(status) {
 void call(String status) {
 	String color = getStatusColor(status)
 	String message = getMessage(status)
-	def response = slackSend(
+	def slackResponse = slackSend(
 		channel : '#jenkins-ci',
 		color   : color,
 		message : message
