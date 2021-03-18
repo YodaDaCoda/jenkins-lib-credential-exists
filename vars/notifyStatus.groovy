@@ -55,9 +55,19 @@ String getMessage(status) {
 void call(String status) {
 	String color = getStatusColor(status)
 	String message = getMessage(status)
-	slackSend (
+	def response = slackSend(
 		channel : '#jenkins-ci',
 		color   : color,
 		message : message
 	)
+
+	// attach sfdx build report to build failure
+	String sfdxReportFile = 'build/reports/sfdx-report.json'
+	if (status != 'SUCCESS' && fileExists(sfdxReportFile)) {
+		slackUploadFile(
+			channel: slackResponse.threadId,
+			initialComment: 'SFDX Build Report',
+			filePath: sfdxReportFile
+		)
+	}
 }
