@@ -62,11 +62,6 @@ void attachFile(slackResponse) {
 
 	def report = readYaml(file: sfdxReportFile)
 
-	if (report['result'] == null) {
-		println("SFDX deploy report json file is not in an understood format, missing 'result' key (${sfdxReportFile})")
-		return
-	}
-
 	def numberComponentErrors    = report['numberComponentErrors']
 	def numberComponentsDeployed = report['numberComponentsDeployed']
 	def numberComponentsTotal    = report['numberComponentsTotal']
