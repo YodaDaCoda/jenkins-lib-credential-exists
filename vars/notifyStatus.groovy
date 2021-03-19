@@ -53,7 +53,7 @@ String getMessage(status) {
 }
 
 void attachFile(slackResponse) {
-	String sfdxReportFile = 'build/reports/sfdx-report.json'
+	String sfdxReportFile = 'build/reports/sfdx-report-short.json'
 
 	if (!fileExists(sfdxReportFile)) {
 		println("Unable to find SFDX deploy report file (${sfdxReportFile})")
@@ -67,12 +67,12 @@ void attachFile(slackResponse) {
 		return
 	}
 
-	def numberComponentErrors    = report['result']['numberComponentErrors']
-	def numberComponentsDeployed = report['result']['numberComponentsDeployed']
-	def numberComponentsTotal    = report['result']['numberComponentsTotal']
-	def numberTestErrors         = report['result']['numberTestErrors']
-	def numberTestsCompleted     = report['result']['numberTestsCompleted']
-	def numberTestsTotal         = report['result']['numberTestsTotal']
+	def numberComponentErrors    = report['numberComponentErrors']
+	def numberComponentsDeployed = report['numberComponentsDeployed']
+	def numberComponentsTotal    = report['numberComponentsTotal']
+	def numberTestErrors         = report['numberTestErrors']
+	def numberTestsCompleted     = report['numberTestsCompleted']
+	def numberTestsTotal         = report['numberTestsTotal']
 
 	String message = "SFDX Build Report"
 	message = "${message}\nComponents: ${numberComponentsDeployed}/${numberComponentsTotal} (errors: ${numberComponentErrors})"
