@@ -53,14 +53,15 @@ String getMessage(status) {
 }
 
 void attachFile(slackResponse) {
-	String sfdxReportFile = 'build/reports/sfdx-report-short.json'
+	String sfdxReportFile = 'build/reports/sfdx-report.json'
+	String sfdxReportFileShort = 'build/reports/sfdx-report-short.json'
 
-	if (!fileExists(sfdxReportFile)) {
+	if (!fileExists(sfdxReportFileShort)) {
 		println("Unable to find SFDX deploy report file (${sfdxReportFile})")
 		return
 	}
 
-	def report = readYaml(file: sfdxReportFile)
+	def report = readYaml(file: sfdxReportFileShort)
 
 	def numberComponentErrors    = report['numberComponentErrors']
 	def numberComponentsDeployed = report['numberComponentsDeployed']
