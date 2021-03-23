@@ -69,10 +69,14 @@ void attachFile(slackResponse) {
 	def numberTestErrors         = report['numberTestErrors']
 	def numberTestsCompleted     = report['numberTestsCompleted']
 	def numberTestsTotal         = report['numberTestsTotal']
+	def codeCoveragePercentage   = report['codeCoveragePercentage']
 
 	String message = "SFDX Build Report"
 	message = "${message}\nComponents: ${numberComponentsDeployed}/${numberComponentsTotal} (errors: ${numberComponentErrors})"
 	message = "${message}\nTests: ${numberTestsCompleted}/${numberTestsTotal} (errors: ${numberTestErrors})"
+	if (codeCoveragePercentage != null) {
+		message = "${message}\nCoverage: ${codeCoveragePercentage.round(2)}"
+	}
 
 	slackSend(
 		channel : slackResponse.threadId,
