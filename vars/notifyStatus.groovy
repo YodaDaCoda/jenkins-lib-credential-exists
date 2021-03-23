@@ -75,7 +75,7 @@ void attachFile(slackResponse) {
 	message = "${message}\nComponents: ${numberComponentsDeployed}/${numberComponentsTotal} (errors: ${numberComponentErrors})"
 	message = "${message}\nTests: ${numberTestsCompleted}/${numberTestsTotal} (errors: ${numberTestErrors})"
 	if (codeCoveragePercentage != null) {
-		message = "${message}\nCoverage: ${codeCoveragePercentage.round(2)}"
+		message = "${message}\nCoverage: ${codeCoveragePercentage.round(2)}%"
 	}
 
 	slackSend(
