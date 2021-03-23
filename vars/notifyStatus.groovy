@@ -95,7 +95,7 @@ void sendMessage(status, channel, color, message) {
 		color   : color,
 		message : message
 	)
-	if (status != 'STARTED' && status != 'SUCCESS') {
+	if (status != 'STARTED') {
 		attachFile(slackResponse)
 	}
 }
