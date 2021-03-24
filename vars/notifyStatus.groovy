@@ -101,6 +101,9 @@ void sendMessage(status, channel, color, message) {
 }
 
 void call(String status) {
+	if (status == 'NOT_BUILT') {
+		return
+	}
 	String color = getStatusColor(status)
 	String message = getMessage(status)
 	sendMessage(status, '#jenkins-ci', color, message)
