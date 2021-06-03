@@ -29,7 +29,7 @@ String getMessage(status) {
 	String buildDurationString = Util.getTimeSpanString(currentBuild.duration)
 
 	if (env.CHANGE_ID != null) {
-		ret = "${ret} (<${env.CHANGE_URL}|#${env.CHANGE_ID}>"
+		ret = "${ret} ${env.CHANGE_TITLE} (<${env.CHANGE_URL}|#${env.CHANGE_ID}>"
 		if (env.CHANGE_AUTHOR_DISPLAY_NAME != null) {
 			ret = "${ret} by ${env.CHANGE_AUTHOR_DISPLAY_NAME})"
 		} else if (env.CHANGE_AUTHOR != null) {
